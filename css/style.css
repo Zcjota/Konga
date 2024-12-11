@@ -1,0 +1,90 @@
+html {
+    display: table;
+    width: 100%;
+  }
+  
+  body {
+    display: table-cell;
+    vertical-align: middle;
+  
+    text-align: center;
+  
+    font-size: 24px;
+    font-weight: 600;
+    font-family: sans-serif;
+    -webkit-font-smoothing: antialiased;
+  
+    color: #444; /* Primary Color */
+    background-color: #000; /* Background Color */
+  
+    perspective: 1000;
+  }
+  
+  html, body {
+    width: 100%;
+    height: 100%;
+  
+    overflow: hidden;
+  }
+  
+  canvas {
+    image-rendering: auto;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+  }
+  
+  button {
+    font: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+  
+    padding: 8px 16px;
+  
+    color: black;
+    text-shadow: 0px 1px 2px rgba(255, 255, 255, 0.15);
+  
+    background-color: #e38221; /* Tint Color */
+    background-image: linear-gradient(#e38221 0%, #b3641a 100%);
+    box-shadow: inset 0px 0px 2px rgba(255, 255, 255, 0.15);
+  
+    border: none;
+    border-radius: 8px;
+  
+    cursor: pointer;
+    transition: all 0.15s ease-out;
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+    background-image: linear-gradient(#f7b47c 0%, #d28d54 100%);
+  }
+  
+  button:active {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+  
+  audio {
+    position: absolute;
+  
+    width: 0px;
+    height: 0px;
+  
+    visibility: hidden;
+  }
+  
+  @keyframes Cue-In {
+    0% {
+      opacity: 0;
+      transform: scale(0.1) rotateX(45deg);
+    }
+    100% {
+      transform: scale(1) rotateX(0);
+    }
+  }
+  
+  .cue-in {
+    animation: Cue-In 2s ease-in-out;
+  }
+  
