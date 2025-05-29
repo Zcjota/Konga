@@ -1,51 +1,60 @@
-// archivo: js/index.js
 import KongaScene from './js/KongaScene.js'
 
 class MainController {
-  constructor(container) {
+  
+  constructor(container){
     this.container = container
-
-    // — Opcional: si quieres seguir usando la escena, descomenta estas líneas
-    // const scene = new KongaScene()
-    // scene.element.style.display = "none"
-    // container.appendChild(scene.element)
-    // window.addEventListener("resize", this.handleResize.bind(this))
-    // this.scene = scene
-    // this.handleResize()
-
-    // Crear botón “Trust me”
+    
+    // Setup the scene:
+    const scene = new KongaScene()
+    scene.element.style.display = "none"
+    
+    container.appendChild(scene.element)
+    
+    window.addEventListener("resize", this.handleResize.bind(this))
+    
+    this.scene = scene
+    this.handleResize()
+    
+    // Setup loading:    
+    const loadingElement = document.createElement("span")
+    loadingElement.textContent = "Preparing…"
+    
+    // Audio:
+    const audioPlayer = document.getElementsByTagName("audio")[0]
+    audioPlayer.addEventListener("play", () => {
+      loadingElement.parentNode.removeChild(loadingElement)
+      
+      scene.element.classList.add("cue-in")
+      scene.element.style.display = "block"
+      
+      document.title = "Conga!"
+    })
+    
+    // Button:
     const button = document.createElement("button")
     button.textContent = "Trust me"
-    button.style.cssText = `
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 1em 2em;
-      font-size: 1.2em;
-      cursor: pointer;
-    `
-    button.addEventListener("click", () => {
-      // Adiós botón
-      button.remove()
-      // Vuelo directo al video, instante 74s
-      window.location.href = 'https://youtu.be/ibmrEMeCkSo?t=74'
+    button.addEventListener("click", (event) => {
+      // Remove button:
+      button.parentNode.removeChild(button)
+      
+      // Add loading:
+      container.appendChild(loadingElement)
+      
+      // Trigger playback:
+      audioPlayer.play()
     })
-
+    
     container.appendChild(button)
   }
-
-  handleResize() {
-    // if (this.scene) {
-    //   this.scene.size = {
-    //     width: Math.floor(window.innerWidth),
-    //     height: Math.floor(window.innerHeight)
-    //   }
-    // }
+  
+  handleResize(){
+    this.scene.size = { width: Math.floor(window.innerWidth), height: Math.floor(window.innerHeight) }
   }
+  
 }
 
-function awake() {
+function awake(){
   window.controller = new MainController(document.body)
 }
 
